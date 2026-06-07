@@ -1,6 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Star, Clock, GraduationCap, DollarSign, Check, MessageSquare, Award } from 'lucide-react';
 
 function Courses() {
+  const whatsappNumber = "919876543210";
+  const [activeTab, setActiveTab] = useState('All');
+
+  const tabs = ['All', 'Engineering', 'Medical', 'Programming', 'Career Prep'];
+
   const courses = [
     {
       id: 1,
@@ -10,7 +16,7 @@ function Courses() {
       level: "Advanced",
       fee: "₹45,000",
       students: "2,500+",
-      rating: 4.8,
+      rating: 5,
       description: "Comprehensive preparation for IIT-JEE with focus on conceptual clarity and problem-solving.",
       highlights: [
         "Daily mock tests",
@@ -28,7 +34,7 @@ function Courses() {
       level: "Advanced",
       fee: "₹50,000",
       students: "3,200+",
-      rating: 4.9,
+      rating: 5,
       description: "Expert NEET coaching from experienced doctors and educators with proven success track record.",
       highlights: [
         "3 practice exams weekly",
@@ -46,7 +52,7 @@ function Courses() {
       level: "Intermediate",
       fee: "₹30,000",
       students: "1,800+",
-      rating: 4.7,
+      rating: 4,
       description: "Focused EAMCET preparation covering Physics, Chemistry, and Mathematics with state-wise variations.",
       highlights: [
         "Weekly assessments",
@@ -64,7 +70,7 @@ function Courses() {
       level: "Beginner",
       fee: "₹12,000",
       students: "1,500+",
-      rating: 4.6,
+      rating: 4,
       description: "Learn Python, HTML, CSS, JavaScript with real-world projects and industry-standard practices.",
       highlights: [
         "5 live projects",
@@ -76,13 +82,13 @@ function Courses() {
     },
     {
       id: 5,
-      category: "Interview Prep",
+      category: "Career Prep",
       name: "Interview Mastery",
       duration: "3 Months",
       level: "Professional",
       fee: "₹15,000",
       students: "800+",
-      rating: 4.8,
+      rating: 5,
       description: "Complete interview preparation including HR, technical, and coding interview strategies.",
       highlights: [
         "Mock interviews",
@@ -94,13 +100,13 @@ function Courses() {
     },
     {
       id: 6,
-      category: "Internship",
+      category: "Career Prep",
       name: "Internship Ready",
       duration: "2 Months",
       level: "Beginner",
       fee: "₹8,000",
       students: "600+",
-      rating: 4.7,
+      rating: 4,
       description: "Gain practical experience and professional skills required for competitive internship positions.",
       highlights: [
         "Industry mentors",
@@ -112,13 +118,13 @@ function Courses() {
     },
     {
       id: 7,
-      category: "Professional",
+      category: "Career Prep",
       name: "Placement Bootcamp",
       duration: "6 Months",
       level: "Professional",
       fee: "₹25,000",
       students: "1,200+",
-      rating: 4.9,
+      rating: 5,
       description: "End-to-end placement preparation with guaranteed interview calls from top tech and consulting companies.",
       highlights: [
         "Company recruiter sessions",
@@ -130,61 +136,138 @@ function Courses() {
     }
   ];
 
+  const handleWhatsApp = (courseName) => {
+    const message = `Hi! I'm interested in the ${courseName} course. Can you provide more details?`;
+    window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, '_blank');
+  };
+
+  const filteredCourses = activeTab === 'All' 
+    ? courses 
+    : courses.filter(c => c.category === activeTab);
+
+  const renderStars = (rating) => {
+    const stars = [];
+    for (let i = 1; i <= 5; i++) {
+      stars.push(
+        <Star
+          key={i}
+          size={14}
+          className={i <= rating ? 'star-filled' : 'star-empty'}
+          fill={i <= rating ? 'currentColor' : 'none'}
+          style={i <= rating ? {} : { color: '#cbd5e1' }}
+        />
+      );
+    }
+    return stars;
+  };
+
   return (
     <section id="courses" className="courses-section">
-      <div className="courses-header">
-        <h2>Our Premium Courses</h2>
-        <p>Choose from 8+ comprehensive programs designed by industry experts</p>
-      </div>
-      
-      <div className="courses-grid">
-        {courses.map((course) => (
-          <div key={course.id} className="course-card">
-            <div className="course-badge">{course.category}</div>
-            <div className="course-header-content">
-              <h3>{course.name}</h3>
-              <div className="course-rating">
-                <span className="stars">★★★★★</span>
-                <span className="rating-value">{course.rating}</span>
-                <span className="students">({course.students} students)</span>
-              </div>
-            </div>
-            
-            <p className="course-description">{course.description}</p>
-            
-            <div className="course-meta">
-              <div className="meta-item">
-                <span className="meta-label">Duration</span>
-                <span className="meta-value">{course.duration}</span>
-              </div>
-              <div className="meta-item">
-                <span className="meta-label">Level</span>
-                <span className="meta-value">{course.level}</span>
-              </div>
-              <div className="meta-item">
-                <span className="meta-label">Fee</span>
-                <span className="meta-value">{course.fee}</span>
-              </div>
-            </div>
+      <div className="courses-container">
+        <div className="section-header">
+          <span className="section-badge">
+            <Award size={14} />
+            <span>Curriculum</span>
+          </span>
+          <h2 className="section-title">Our Premium Programs</h2>
+          <p className="section-subtitle">
+            Explore industry-vetted courses designed by expert educators to help you crack competitive exams and advance your career.
+          </p>
+        </div>
 
-            <div className="course-highlights">
-              <h4>What You'll Get:</h4>
-              <ul>
-                {course.highlights.map((highlight, idx) => (
-                  <li key={idx}>✓ {highlight}</li>
-                ))}
-              </ul>
-            </div>
+        {/* Tab Filters */}
+        <div className="courses-filter">
+          {tabs.map((tab) => (
+            <button
+              key={tab}
+              className={`filter-tab ${activeTab === tab ? 'active' : ''}`}
+              onClick={() => setActiveTab(tab)}
+            >
+              {tab}
+            </button>
+          ))}
+        </div>
 
-            <div className="course-features">
-              {course.features.map((feature, idx) => (
-                <span key={idx} className="feature-tag">{feature}</span>
-              ))}
-            </div>
+        {/* Courses Grid */}
+        <div className="courses-grid">
+          {filteredCourses.map((course) => (
+            <div key={course.id} className="course-card">
+              <div className="course-card-header">
+                <span className="course-card-badge">
+                  {course.category}
+                </span>
+                <h3>{course.name}</h3>
+                
+                <div className="course-card-rating">
+                  <div className="course-stars">
+                    {renderStars(course.rating)}
+                  </div>
+                  <span className="course-rating-val">{course.rating}.0</span>
+                  <span className="course-students-count">({course.students} students)</span>
+                </div>
+              </div>
 
-            <button className="enroll-btn">Enroll Now</button>
-          </div>
-        ))}
+              <div className="course-card-body">
+                <p className="course-desc">{course.description}</p>
+
+                {/* Details Grid */}
+                <div className="course-details-grid">
+                  <div className="detail-chip">
+                    <span className="detail-label">Duration</span>
+                    <span className="detail-val">{course.duration}</span>
+                  </div>
+                  <div className="detail-chip">
+                    <span className="detail-label">Level</span>
+                    <span className="detail-val">{course.level}</span>
+                  </div>
+                  <div className="detail-chip">
+                    <span className="detail-label">Fee</span>
+                    <span className="detail-val">{course.fee}</span>
+                  </div>
+                </div>
+
+                {/* Highlights */}
+                <div className="course-highlights-list">
+                  <h4>Key Takeaways:</h4>
+                  <ul>
+                    {course.highlights.map((highlight, idx) => (
+                      <li key={idx}>
+                        <Check size={14} />
+                        <span>{highlight}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Tags */}
+                <div className="course-tags">
+                  {course.features.map((feature, idx) => (
+                    <span key={idx} className="course-tag">
+                      {feature}
+                    </span>
+                  ))}
+                </div>
+
+                {/* CTAs */}
+                <div className="course-btn-group">
+                  <button
+                    className="btn btn-outline"
+                    onClick={() => handleWhatsApp(course.name)}
+                  >
+                    <MessageSquare size={14} />
+                    <span>Inquire</span>
+                  </button>
+                  <button 
+                    className="btn btn-primary"
+                    onClick={() => handleWhatsApp(course.name)}
+                  >
+                    Enroll Now
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
