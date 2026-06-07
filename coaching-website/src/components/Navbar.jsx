@@ -17,7 +17,7 @@ function Navbar() {
       }
 
       // Highlight active section on scroll
-      const sections = ['home', 'about', 'courses', 'results', 'contact'];
+      const sections = ['home', 'about', 'courses', 'results', 'testimonials', 'faq', 'contact'];
       const scrollPosition = window.scrollY + 100;
 
       for (const section of sections) {
@@ -50,6 +50,8 @@ function Navbar() {
     { id: 'about', label: 'About' },
     { id: 'courses', label: 'Courses' },
     { id: 'results', label: 'Results' },
+    { id: 'testimonials', label: 'Testimonials' },
+    { id: 'faq', label: 'FAQs' },
     { id: 'contact', label: 'Contact' }
   ];
 

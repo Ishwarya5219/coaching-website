@@ -1179,6 +1179,108 @@ footer {
   font-size: 0.9rem;
 }
 
+/* ===== FAQ SECTION ===== */
+.faq-section {
+  background-color: hsl(var(--bg-body));
+  position: relative;
+  z-index: 1;
+}
+
+.faq-container {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.faq-item {
+  background: white;
+  border: 1px solid hsl(var(--border-color));
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: var(--transition);
+}
+
+.faq-item:hover {
+  border-color: hsl(var(--primary) / 0.3);
+  box-shadow: var(--shadow-sm);
+}
+
+.faq-item.active {
+  border-color: hsl(var(--primary) / 0.5);
+  box-shadow: var(--shadow-md);
+}
+
+.faq-trigger {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 24px 30px;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.faq-question {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: hsl(var(--text-main));
+  transition: var(--transition);
+}
+
+.faq-trigger:hover .faq-question {
+  color: hsl(var(--primary));
+}
+
+.faq-icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: hsl(var(--bg-body));
+  border-radius: 50%;
+  color: hsl(var(--text-main));
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+
+.faq-item.active .faq-icon-wrapper {
+  background: hsl(var(--primary));
+  color: white;
+  transform: rotate(180deg);
+}
+
+.faq-content {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.faq-item.active .faq-content {
+  grid-template-rows: 1fr;
+}
+
+.faq-answer {
+  overflow: hidden;
+}
+
+.faq-answer p {
+  padding: 0 30px 24px;
+  font-size: 0.95rem;
+  color: hsl(var(--text-muted));
+  line-height: 1.7;
+}
+
 /* ===== MOBILE RESPONSIVE ===== */
 @media (max-width: 1024px) {
   .about-container {
@@ -1268,5 +1370,18 @@ footer {
 
   .contact-form-actions {
     grid-template-columns: 1fr;
+  }
+
+  .faq-trigger {
+    padding: 18px 20px;
+  }
+
+  .faq-question {
+    font-size: 0.95rem;
+  }
+
+  .faq-answer p {
+    padding: 0 20px 18px;
+    font-size: 0.88rem;
   }
 }

@@ -7,15 +7,16 @@ import { useEffect, useState } from "react";
 import Navbar from './components/Navbar';
 import Courses from './components/Courses';
 import Contact from './components/Contact';
-import { 
-  GraduationCap, 
-  TrendingUp, 
-  Award, 
-  BookOpen, 
-  Users, 
-  Star, 
-  Briefcase, 
-  Target 
+import FAQ from './components/FAQ';
+import {
+  GraduationCap,
+  TrendingUp,
+  Award,
+  BookOpen,
+  Users,
+  Star,
+  Briefcase,
+  Target
 } from 'lucide-react';
 
 function App() {
@@ -63,10 +64,10 @@ function App() {
         <div className="hero-slider">
           {slides.map((slide, idx) => (
             <div key={idx} className={`hero-slide ${idx === currentSlide ? 'active' : ''}`}>
-              <img 
-                src={slide.image} 
-                alt={`Slide ${idx + 1}`} 
-                className="hero-bg" 
+              <img
+                src={slide.image}
+                alt={`Slide ${idx + 1}`}
+                className="hero-bg"
                 style={slide.objectPosition ? { objectPosition: slide.objectPosition } : undefined}
               />
             </div>
@@ -83,9 +84,9 @@ function App() {
               <a href="#courses" className="btn btn-primary">
                 Explore Programs
               </a>
-              <a 
-                href="#contact" 
-                className="btn btn-outline" 
+              <a
+                href="#contact"
+                className="btn btn-outline"
                 style={{ color: 'white', borderColor: 'rgba(255, 255, 255, 0.3)' }}
               >
                 Get Counseling
@@ -106,11 +107,11 @@ function App() {
             </span>
             <h2 className="section-title">Empowering Academic Leaders</h2>
             <p className="about-description">
-              At Bright Future Academy, we prepare the next generation of engineers, doctors, and tech professionals. 
+              At Bright Future Academy, we prepare the next generation of engineers, doctors, and tech professionals.
               Our student-centered curriculum bridges the gap between raw potential and competitive rank outputs.
             </p>
             <p className="about-description">
-              With detailed diagnostic mock reviews, adaptive curriculum models, and custom counseling pipelines, 
+              With detailed diagnostic mock reviews, adaptive curriculum models, and custom counseling pipelines,
               we ensure that every student secures a structural path toward placement or degree excellence.
             </p>
 
@@ -288,7 +289,7 @@ function App() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="testimonials-section">
+      <section id="testimonials" className="testimonials-section">
         <div className="testimonials-container">
           <div className="section-header">
             <span className="section-badge">
@@ -344,6 +345,8 @@ function App() {
           </div>
         </div>
       </section>
+
+      <FAQ />
 
       <Contact />
 
